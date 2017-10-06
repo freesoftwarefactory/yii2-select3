@@ -5,7 +5,7 @@ use yii\web\AssetBundle;
 
 class Select3Asset extends AssetBundle
 {
-    public $sourcePath = '@vendor/freesoftwarefactory/select3/assets';
+    public $sourcePath = '@vendor/freesoftwarefactory/yii2-select3/assets';
     public $js = [
         'select3.js',
     ];

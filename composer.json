@@ -16,7 +16,7 @@
     },
 	"autoload": {
 		"psr-4": {
-			"freesoftwarefactory\\yii2-select3\\": ""
+			"freesoftwarefactory\\select3\\": ""
 		}
 	}
 }

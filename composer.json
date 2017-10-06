@@ -1,0 +1,22 @@
+{
+    "name": "freesoftwarefactory/yii2-select3",
+    "description": "a specialized jquery based DropDownList component displaying checkboxes as options.",
+    "keywords": ["yii2", "widgets", "DropDownList","Select3"],
+  	"homepage": "http://github.com/freesoftwarefactory/select3/wiki",
+    "type": "library",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Cristian Salazar",
+            "homepage": "https://www.chileshift.cl/freesoftwarefactory"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/freesoftwarefactory/yii2-select3/issues"
+    },
+	"autoload": {
+		"psr-4": {
+			"freesoftwarefactory\\yii2-select3\\": ""
+		}
+	}
+}

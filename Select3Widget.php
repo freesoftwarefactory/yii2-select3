@@ -16,6 +16,8 @@ use freesoftwarefactory\select3\Select3Asset;
  */
 class Select3Widget extends Widget
 {
+    public $id = null;  // automatically created on null
+
     public $model;
 
     public $attribute;
@@ -30,6 +32,8 @@ class Select3Widget extends Widget
 
     public function run()
     {
+        $this->id = null==$this->id ? $this->getUniqueId() : $this->id;
+
         $context = Yii::$app->controller;
 
         Select3Asset::register($context->view);
@@ -40,18 +44,20 @@ class Select3Widget extends Widget
 
         $values = 
         [
+            ":id" => $this->id,
+
             ":prompt" => htmlentities($this->prompt),
 
             ":hiddeninput" => $hiddenInput,
 
-            ":options" => $this->renderOptions($this->options, 
+            ":options" => $this->renderOptions($this->id, $this->options, 
                     $this->allSelectable, $this->allSelectableLabel),
         ];
 
         return strtr($markup, $values);
     }
 
-    private function renderOptions($options, $addPrompt, $prompt)
+    private function renderOptions($id, $options, $addPrompt, $prompt)
     {
         if(empty($options)) return "";
     
@@ -63,7 +69,7 @@ class Select3Widget extends Widget
         {
             $payload = "
                 <label class='option option-all option-border-color noselect'>
-                    <input type='checkbox' value='' >
+                    <input type='checkbox' data-group='#{$id}' data-type='all' value='' >
                     {$prompt}
                 </label>
             ";
@@ -75,7 +81,7 @@ class Select3Widget extends Widget
 
             $payload .= "    
                 <label class='option option-value option-border-color noselect'>
-                    <input type='checkbox' value='$key'>
+                    <input type='checkbox' data-group='#{$id}' data-type='value' value='$key'>
                     {$safeValue}
                 </label>
             ";
@@ -88,7 +94,7 @@ class Select3Widget extends Widget
     {
         return 
         "
-            <div class='select3'>
+            <div id=':id' class='select3'>
                 <div class='inner'>
                     <div class='select' >
                         <div class='text noselect'>
@@ -107,4 +113,8 @@ class Select3Widget extends Widget
         ";
     }
 
+    private function getUniqueId()
+    {
+        return "select3_".hash('crc32',microtime(true));
+    }
 }

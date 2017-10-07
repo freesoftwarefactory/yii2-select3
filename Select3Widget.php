@@ -36,6 +36,8 @@ class Select3Widget extends Widget
 
     public $launchOnLabelClick = false;
 
+    public $autoSelectOptions = []; // ie: ["yes"]
+
     public function run()
     {
         $this->id = null==$this->id ? $this->getUniqueId() : $this->id;
@@ -58,7 +60,7 @@ class Select3Widget extends Widget
 
             ":options" => $this->renderOptions($this->id, $this->options, 
                     $this->allSelectable, $this->allSelectableLabel, 
-                        $this->disabledOptions),
+                        $this->disabledOptions, $this->autoSelectOptions),
 
             ":display" => $this->visibleAtStartup ? "block" : "none",
 
@@ -68,7 +70,7 @@ class Select3Widget extends Widget
         return strtr($markup, $values);
     }
 
-    private function renderOptions($id, $options, $addPrompt, $prompt, $disabledOptions)
+    private function renderOptions($id, $options, $addPrompt, $prompt, $disabledOptions, $autoSelectOptions)
     {
         if(empty($options)) return "";
     
@@ -96,10 +98,18 @@ class Select3Widget extends Widget
         if(count($options) && $addPrompt)
         {
             $checked = $allChecked ? "checked" : "";
+        
+            $enabledOptions = 0;
+            foreach($options as $key=>$value)
+                if(!in_array($key, $disabledOptions)) $enabledOptions++;
+
+            $disabled = (1==$enabledOptions) ? "disabled" : "";
+
+            $disabledClass = (1 == $enabledOptions) ? "option-disabled" : "";
 
             $payload = "
-                <label class='option option-all option-border-color noselect'>
-                    <input type='checkbox' data-group='#{$id}' data-type='all' value='' $checked>
+                <label class='option option-all option-border-color noselect $disabledClass'>
+                    <input $disabled type='checkbox' data-group='#{$id}' data-type='all' value='' $checked>
                     {$prompt}
                 </label>
             ";
@@ -109,13 +119,25 @@ class Select3Widget extends Widget
         {
             $safeValue = htmlentities($value);
 
-            $checked = $values ? (isset($values[$key]) ? (true==$values[$key]) : false) : false;
+            $isChecked = $values ? (isset($values[$key]) ? (true==$values[$key]) : false) : false;
 
-            $checked = $checked ? "checked" : "";
+            $checked = $isChecked ? "checked" : "";
 
-            $disabled = in_array($key, $disabledOptions) ? "disabled" : "";
+            $isDisabled = in_array($key, $disabledOptions);
+
+            $disabled = $isDisabled ? "disabled" : "";
             
-            $disabledClass = in_array($key, $disabledOptions) ? "option-disabled" : "";
+            $disabledClass = $isDisabled ? "option-disabled" : "";
+
+            if(!$isDisabled && !$isChecked)
+            {
+                if(in_array($key, $autoSelectOptions))  
+                {
+                    $isChecked = true;
+
+                    $checked = $isChecked ? "checked" : "";
+                }
+            }
 
             $payload .= "    
                 <label class='option option-value option-border-color noselect $disabledClass'>

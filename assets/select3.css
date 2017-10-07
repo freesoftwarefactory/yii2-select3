@@ -1,0 +1,72 @@
+.select3
+{
+    border: 1px solid #eee;
+}
+
+.select3 .text-color
+{
+    color: #666;
+}
+
+.select3 .bg-color
+{
+    background-color: #eee;
+}
+
+.select3 .bg-color:hover
+{
+    background-color: #ddd;
+}
+
+.select3 .caret-color
+{
+    border-top-color: #333 !Important;
+}
+
+.select3 .caret-down 
+{
+    width: 0; 
+    height: 0; 
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #333;
+}
+
+
+.select3
+  .select
+{
+    overflow: auto;
+}
+
+.select3
+  .select
+    .text
+{
+    vertical-align: top;
+    float: left;
+    width: 80%;
+    padding: 3pt;
+    padding-left: 6pt;
+    overflow: hidden;
+    height: 23pt;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.select3
+  .select
+    .activator
+{
+    border: 1px solid #eee;
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+    padding: 8pt;
+    cursor: pointer;
+    transition: 0.5s;
+}
+

@@ -26,6 +26,8 @@ class Select3Widget extends Widget
 
     public $options = [ "yes" => "Yes" , "no" => "No" ];
 
+    public $disabledOptions = []; // ie: ["no"] (only the key)
+
     public $allSelectable = true;
     
     public $allSelectableLabel = "(All)";
@@ -55,7 +57,8 @@ class Select3Widget extends Widget
             ":hiddeninput" => $hiddenInput,
 
             ":options" => $this->renderOptions($this->id, $this->options, 
-                    $this->allSelectable, $this->allSelectableLabel),
+                    $this->allSelectable, $this->allSelectableLabel, 
+                        $this->disabledOptions),
 
             ":display" => $this->visibleAtStartup ? "block" : "none",
 
@@ -65,7 +68,7 @@ class Select3Widget extends Widget
         return strtr($markup, $values);
     }
 
-    private function renderOptions($id, $options, $addPrompt, $prompt)
+    private function renderOptions($id, $options, $addPrompt, $prompt, $disabledOptions)
     {
         if(empty($options)) return "";
     
@@ -110,9 +113,13 @@ class Select3Widget extends Widget
 
             $checked = $checked ? "checked" : "";
 
+            $disabled = in_array($key, $disabledOptions) ? "disabled" : "";
+            
+            $disabledClass = in_array($key, $disabledOptions) ? "option-disabled" : "";
+
             $payload .= "    
-                <label class='option option-value option-border-color noselect'>
-                    <input type='checkbox' data-group='#{$id}' data-type='value' value='$key' $checked>
+                <label class='option option-value option-border-color noselect $disabledClass'>
+                    <input $disabled type='checkbox' data-group='#{$id}' data-type='value' value='$key' $checked>
                     {$safeValue}
                 </label>
             ";
@@ -135,7 +142,8 @@ class Select3Widget extends Widget
                             <div class='caret-down caret-color'></div>
                         </div>
                     </div>
-                    <div class='options bg-color-list' data-group='#:id' style='display: :display;'>
+                    <div class='options bg-color-list' 
+                        data-group='#:id' style='display: :display;'>
                         :options
                     </div>
                 </div>

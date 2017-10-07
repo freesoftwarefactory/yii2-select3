@@ -57,9 +57,11 @@ jQuery(document).ready(function($){
                 
                     var iAmAll = ('all' == $(chk).attr('data-type'));
                     
+                    var isDisabled = $(chk).is(":disabled");
+
                     var key = $(chk).val();
                     
-                    if(allWasClicked && !iAmAll)
+                    if(allWasClicked && !iAmAll && !isDisabled)
                     {
                         $(chk).prop('checked', clicked.is(':checked'));
                     }

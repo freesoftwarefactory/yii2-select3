@@ -119,3 +119,8 @@
 {
     margin-right: 3pt;
 }
+
+.select3 .options .option-disabled
+{
+    color: #aaa;
+}

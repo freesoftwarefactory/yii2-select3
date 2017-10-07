@@ -18,6 +18,13 @@
     background-color: #ddd;
 }
 
+.select3 .bg-color-list
+{
+    background-color: #fffffe;
+    border-left: 1px dotted #eee;
+    box-shadow: 2px 2px 5pt #f3f3f3;
+}
+
 .select3 .caret-color
 {
     border-top-color: #333 !Important;
@@ -84,13 +91,15 @@
     max-height: 150pt;
     overflow-y: scroll;
     border-top: 1px solid #eee;
+    position : absolute;
+    z-index: 2147483647;
 }
 
 .select3
     .options
         .option
 {
-    display: inline-block;
+    display: block;
     width: 100%;
     border-bottom: 1px dotted #eee;
     padding: 3pt;

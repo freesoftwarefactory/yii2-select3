@@ -29,6 +29,8 @@ class Select3Widget extends Widget
     public $allSelectable = true;
     
     public $allSelectableLabel = "(All)";
+    
+    public $visibleAtStartup = false;
 
     public function run()
     {
@@ -52,6 +54,8 @@ class Select3Widget extends Widget
 
             ":options" => $this->renderOptions($this->id, $this->options, 
                     $this->allSelectable, $this->allSelectableLabel),
+
+            ":display" => $this->visibleAtStartup ? "block" : "none",
         ];
 
         return strtr($markup, $values);
@@ -127,7 +131,7 @@ class Select3Widget extends Widget
                             <div class='caret-down caret-color'></div>
                         </div>
                     </div>
-                    <div class='options' style='_display: none;'>
+                    <div class='options bg-color-list' group-id='#:id' style='display: :display;'>
                         :options
                     </div>
                 </div>

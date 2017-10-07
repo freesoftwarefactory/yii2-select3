@@ -5,6 +5,14 @@ jQuery(document).ready(function($){
             $(o).hide();
         });           
     });
+    
+    $(window).click(function(e){
+        var t = $(e.target);
+        if($(t).parents('.select3').length > 0) {
+            return;
+        }
+        $('.select3').find('.options').hide();
+    });
 
     $.fn.select3 = function()
     {
@@ -17,7 +25,7 @@ jQuery(document).ready(function($){
             var activator = function()
             {
                 $('.select3 .options:visible').each(function(i,o){ 
-                    if($(o).attr('group-id') != options.attr('group-id'))
+                    if($(o).attr('data-group') != options.attr('data-group'))
                         $(o).hide();
                 });
 
@@ -63,7 +71,6 @@ jQuery(document).ready(function($){
 
                 });
 
-                console.log(obj);
                 hidden.val(window.btoa(JSON.stringify(obj))); 
             });
 

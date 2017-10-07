@@ -135,7 +135,7 @@ class Select3Widget extends Widget
                             <div class='caret-down caret-color'></div>
                         </div>
                     </div>
-                    <div class='options bg-color-list' group-id='#:id' style='display: :display;'>
+                    <div class='options bg-color-list' data-group='#:id' style='display: :display;'>
                         :options
                     </div>
                 </div>

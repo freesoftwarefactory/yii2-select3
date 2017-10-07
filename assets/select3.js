@@ -1,5 +1,11 @@
 jQuery(document).ready(function($){
-	
+
+    $(window).scroll(function(){
+        $('.select3 .options:visible').each(function(i,o){ 
+            $(o).hide();
+        });           
+    });
+
     $.fn.select3 = function()
     {
 		var _this = this;
@@ -27,7 +33,7 @@ jQuery(document).ready(function($){
                widget.find('.text').click(activator);
             }
            
-            options.css({ 'z-index' : options.parent().zIndex() });
+            options.css({ 'z-index' : 1000000 });
 
             widget.find('[type=checkbox]').change(function(){
                 

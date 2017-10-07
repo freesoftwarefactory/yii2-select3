@@ -6,10 +6,10 @@ jQuery(document).ready(function($){
 		$(_this).each(function(){
 			var widget = $(this);
             var hidden = widget.find("input[type=hidden]");
-         
-            widget.find('.activator').click(function(){
-                var options = widget.find('.options');
-                
+            var options = widget.find('.options');
+            
+            var activator = function()
+            {
                 $('.select3 .options:visible').each(function(i,o){ 
                     if($(o).attr('group-id') != options.attr('group-id'))
                         $(o).hide();
@@ -18,7 +18,16 @@ jQuery(document).ready(function($){
                 options.toggle();
 
                 options.css({ "width" : options.parent().width() });
-            });
+            };
+         
+            widget.find('.activator').click(activator);
+        
+            if('yes' == widget.find('.text').attr('data-click-behavior'))
+            {
+               widget.find('.text').click(activator);
+            }
+           
+            options.css({ 'z-index' : options.parent().zIndex() });
 
             widget.find('[type=checkbox]').change(function(){
                 

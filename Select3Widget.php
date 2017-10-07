@@ -32,6 +32,8 @@ class Select3Widget extends Widget
     
     public $visibleAtStartup = false;
 
+    public $launchOnLabelClick = false;
+
     public function run()
     {
         $this->id = null==$this->id ? $this->getUniqueId() : $this->id;
@@ -56,6 +58,8 @@ class Select3Widget extends Widget
                     $this->allSelectable, $this->allSelectableLabel),
 
             ":display" => $this->visibleAtStartup ? "block" : "none",
+
+            ":labelclic" => $this->launchOnLabelClick ? 'yes' : 'no',
         ];
 
         return strtr($markup, $values);
@@ -124,7 +128,7 @@ class Select3Widget extends Widget
             <div id=':id' class='select3'>
                 <div class='inner'>
                     <div class='select' >
-                        <div class='text noselect'>
+                        <div class='text noselect' data-click-behavior=':labelclic'>
                             <span class='text-color'>:prompt</span>
                         </div>
                         <div class='activator bg-color'>

@@ -92,7 +92,7 @@
     overflow-y: scroll;
     border-top: 1px solid #eee;
     position : absolute;
-    z-index: 2147483647;
+    /* z-index: 2147483647; */
 }
 
 .select3

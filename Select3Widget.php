@@ -65,11 +65,30 @@ class Select3Widget extends Widget
 
         $payload = "";
     
+        $values = $this->getDecodedValue();
+        
+        $allChecked = true;
+
+        if($values)
+        {
+            foreach($values as $key=>$value)
+                if(!$value)
+                {
+                    $allChecked = false;
+                    break;
+                }
+        }
+        else
+        $allChecked = false;
+
+
         if(count($options) && $addPrompt)
         {
+            $checked = $allChecked ? "checked" : "";
+
             $payload = "
                 <label class='option option-all option-border-color noselect'>
-                    <input type='checkbox' data-group='#{$id}' data-type='all' value='' >
+                    <input type='checkbox' data-group='#{$id}' data-type='all' value='' $checked>
                     {$prompt}
                 </label>
             ";
@@ -79,9 +98,13 @@ class Select3Widget extends Widget
         {
             $safeValue = htmlentities($value);
 
+            $checked = $values ? (isset($values[$key]) ? (true==$values[$key]) : false) : false;
+
+            $checked = $checked ? "checked" : "";
+
             $payload .= "    
                 <label class='option option-value option-border-color noselect'>
-                    <input type='checkbox' data-group='#{$id}' data-type='value' value='$key'>
+                    <input type='checkbox' data-group='#{$id}' data-type='value' value='$key' $checked>
                     {$safeValue}
                 </label>
             ";
@@ -116,5 +139,19 @@ class Select3Widget extends Widget
     private function getUniqueId()
     {
         return "select3_".hash('crc32',microtime(true));
+    }
+
+    private function getDecodedValue()
+    {
+        $value = $this->model[$this->attribute];
+
+        if(!empty($value))
+        {
+            return json_decode(base64_decode($value), true);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

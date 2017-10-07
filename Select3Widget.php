@@ -139,15 +139,10 @@ class Select3Widget extends Widget
             </div> 
         ";
     }
-
-    private function getUniqueId()
+   
+    public static function getDecodedValueFrom($model, $attribute)
     {
-        return "select3_".hash('crc32',microtime(true));
-    }
-
-    private function getDecodedValue()
-    {
-        $value = $this->model[$this->attribute];
+        $value = $model->$attribute;
 
         if(!empty($value))
         {
@@ -158,4 +153,15 @@ class Select3Widget extends Widget
             return null;
         }
     }
+    
+    private function getUniqueId()
+    {
+        return "select3_".hash('crc32',microtime(true));
+    }
+
+    private function getDecodedValue()
+    {
+        return self::getDecodedValueFrom($this->model, $this->attribute);
+    }
+    
 }

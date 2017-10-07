@@ -36,9 +36,13 @@ class Select3Widget extends Widget
    
         $markup = $this->getMarkup();
 
+        $hiddenInput = Html::activeHiddenInput($this->model, $this->attribute);
+
         $values = 
         [
             ":prompt" => htmlentities($this->prompt),
+
+            ":hiddeninput" => $hiddenInput,
 
             ":options" => $this->renderOptions($this->options, 
                     $this->allSelectable, $this->allSelectableLabel),
@@ -98,6 +102,7 @@ class Select3Widget extends Widget
                         :options
                     </div>
                 </div>
+                :hiddeninput
             </div> 
         ";
     }

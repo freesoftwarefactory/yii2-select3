@@ -83,3 +83,30 @@ Or... just call :)
 ```
 $values =  Select3Widget::getDecodedValueFrom($model, 'yourAttribute');
 ```
+
+## More functions
+
+1. load items via javascript by calling:
+
+```
+$.fn.select3load($('#widgetid') , { 123 : some , 456 : thing });
+```
+
+2. Disable the control by passing:
+
+```
+[
+    'disable'=>true,
+]
+```
+
+3. Disable/Check some items at startup by calling
+
+```
+[
+    'disabledOptions' => ['somekeydisabled'],
+
+    'selectAtStartup' => ['somekeySelectedFromTheBeginning'],
+]
+```
+

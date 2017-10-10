@@ -106,7 +106,7 @@ $.fn.select3load($('#widgetid') , { 123 : some , 456 : thing });
 [
     'disabledOptions' => ['somekeydisabled'],
 
-    'selectAtStartup' => ['somekeySelectedFromTheBeginning'],
+    'autoSelectOptions' => ['somekeySelectedFromTheBeginning'],
 ]
 ```
 

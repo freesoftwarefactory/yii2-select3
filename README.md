@@ -110,3 +110,12 @@ $.fn.select3load($('#widgetid') , { 123 : some , 456 : thing });
 ]
 ```
 
+4. Javascript events to listen for changes
+
+```
+$this->registerJs("
+    $(document).on('select3-changed', [], function(e, options, widget){
+        console.log('select3-changed', options, widget);     
+    });
+");
+```

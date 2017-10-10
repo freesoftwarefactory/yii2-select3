@@ -49,6 +49,8 @@ jQuery(document).ready(function($){
             });
 
             hidden.val(window.btoa(JSON.stringify(obj))); 
+	
+            $( document ).trigger( 'select3-changed', [ obj , widget ]);
         });
     };
 

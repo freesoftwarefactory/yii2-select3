@@ -16,10 +16,18 @@ jQuery(document).ready(function($){
 
     var select3bind = function(widget)
     {
+
+        var hidden = widget.find("input[type=hidden]");
+        
+        var obj = hidden.val();
+
+        if(obj)
+            obj = JSON.parse(window.atob(obj));
+     
+        setTimeout(function(){ $( document ).trigger( 'select3-initialized', [ obj , widget ]); } , 1);
+        
         widget.find('[type=checkbox]').change(function(){
-           
-            var hidden = widget.find("input[type=hidden]");
-            
+               
             var clicked = $(this);
             
             var checkboxes = $(clicked.attr("data-group")).find("[type=checkbox]");
@@ -52,6 +60,7 @@ jQuery(document).ready(function($){
 	
             $( document ).trigger( 'select3-changed', [ obj , widget ]);
         });
+
     };
 
     $.fn.select3 = function()
@@ -63,6 +72,9 @@ jQuery(document).ready(function($){
             
             var activator = function()
             {
+                if(true==widget.hasClass('select3-disabled'))
+                    return;
+
                 $('.select3 .options:visible').each(function(i,o){ 
                     if($(o).attr('data-group') != options.attr('data-group'))
                         $(o).hide();
@@ -124,6 +136,19 @@ jQuery(document).ready(function($){
         });
 
         $.fn.select3rebind(widget);
+    };
+
+    $.fn.select3Status = function(widget, boolEnabled)
+    {
+        var cls = 'select3-disabled';
+        if(boolEnabled)
+        {
+            if(widget.hasClass(cls)) widget.removeClass(cls);    
+        }
+        else
+        {
+            if(!widget.hasClass(cls)) widget.addClass(cls);    
+        }
     };
 
     $('.select3').select3();

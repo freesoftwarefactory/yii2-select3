@@ -50,7 +50,8 @@ class Select3Widget extends Widget
    
         $markup = $this->getMarkup();
 
-        $hiddenInput = Html::activeHiddenInput($this->model, $this->attribute);
+        $hiddenInput = Html::activeHiddenInput($this->model, $this->attribute,
+            ['value'=>$this->getInitialValue()]);
 
         $values = 
         [
@@ -201,5 +202,30 @@ class Select3Widget extends Widget
     {
         return self::getDecodedValueFrom($this->model, $this->attribute);
     }
-    
+   
+    private function getInitialValue()
+    {
+        $currentValue = $this->model[$this->attribute];
+
+        if(empty($currentValue))
+        {
+            $opts = [];
+
+            foreach($this->options as $key=>$label)
+            {
+                $checked = false;
+
+                if(in_array($key, $this->autoSelectOptions))
+                {
+                    $checked = true;      
+                }
+
+                $opts[$key] = $checked;
+            }
+
+            return base64_encode(json_encode($opts));
+        }
+        else
+        return $currentValue;
+    }
 }

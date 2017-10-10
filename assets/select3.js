@@ -70,12 +70,15 @@ jQuery(document).ready(function($){
 
                 options.css({ "width" : options.parent().width() });
             };
-         
-            widget.find('.activator').click(activator);
-        
-            if('yes' == widget.find('.text').attr('data-click-behavior'))
+
+            if(false==widget.hasClass('select3-disabled'))
             {
-               widget.find('.text').click(activator);
+                widget.find('.activator').click(activator);
+            
+                if('yes' == widget.find('.text').attr('data-click-behavior'))
+                {
+                   widget.find('.text').click(activator);
+                }
             }
            
             options.css({ 'z-index' : 1000000 });

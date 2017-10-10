@@ -38,6 +38,8 @@ class Select3Widget extends Widget
 
     public $autoSelectOptions = []; // ie: ["yes"]
 
+    public $disabled;  // bool
+
     public function run()
     {
         $this->id = null==$this->id ? $this->getUniqueId() : $this->id;
@@ -65,6 +67,8 @@ class Select3Widget extends Widget
             ":display" => $this->visibleAtStartup ? "block" : "none",
 
             ":labelclic" => $this->launchOnLabelClick ? 'yes' : 'no',
+
+            ":disabled" => true==$this->disabled ? 'select3-disabled' : '',
         ];
 
         return strtr($markup, $values);
@@ -154,7 +158,7 @@ class Select3Widget extends Widget
     {
         return 
         "
-            <div id=':id' class='select3'>
+            <div id=':id' class='select3 :disabled'>
                 <div class='inner'>
                     <div class='select' >
                         <div class='text noselect' data-click-behavior=':labelclic'>

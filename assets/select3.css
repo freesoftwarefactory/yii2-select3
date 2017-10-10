@@ -35,6 +35,26 @@
     border-bottom-color: #eee !Important;
 }
 
+.select3-disabled
+ .text
+    span
+{
+    color: #ccc !Important;
+}
+
+.select3-disabled
+    .activator
+        .caret-down
+{
+    border-top-color: #ccc !Important;
+}
+
+.select3-disabled .bg-color:hover
+{
+    background-color: transparent !Important;
+    cursor: not-allowed !important;
+}
+
 .select3 .caret-down 
 {
     width: 0; 

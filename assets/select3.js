@@ -85,7 +85,7 @@ jQuery(document).ready(function($){
                 options.css({ "width" : options.parent().width() });
             };
 
-            if(false==widget.hasClass('select3-disabled'))
+            // if(false==widget.hasClass('select3-disabled'))
             {
                 widget.find('.activator').click(activator);
             
